@@ -17,7 +17,7 @@
     
     
       
-        <title>使用mkdocs搭建个人博客 - mqy9174583</title>
+        <title>Mac 安装Mkdocs - mqy9174583</title>
       
     
     
@@ -64,6 +64,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#mac-mkdocs" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -95,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              使用mkdocs搭建个人博客
+              Mac 安装Mkdocs
             
           </span>
         </div>
@@ -182,7 +187,7 @@
   
     <li class="md-nav__item">
       <a href="../../.." class="md-nav__link">
-        导航
+        Home
       </a>
     </li>
   
@@ -260,10 +265,64 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Mac 安装Mkdocs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        使用mkdocs搭建个人博客
+        Mac 安装Mkdocs
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mkdocs" class="md-nav__link">
+    安装Mkdocs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    安装主题
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index" class="md-nav__link">
+    设置index
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#github" class="md-nav__link">
+    部署到github
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -300,6 +359,44 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mkdocs" class="md-nav__link">
+    安装Mkdocs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    安装主题
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index" class="md-nav__link">
+    设置index
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#github" class="md-nav__link">
+    部署到github
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -314,9 +411,96 @@
                   
 
 
-  <h1>使用mkdocs搭建个人博客</h1>
+<h1 id="mac-mkdocs">Mac 安装Mkdocs<a class="headerlink" href="#mac-mkdocs" title="Permanent link">&para;</a></h1>
+<h2 id="mkdocs">安装Mkdocs<a class="headerlink" href="#mkdocs" title="Permanent link">&para;</a></h2>
+<ol>
+<li>安装python3（可能已经预装好来）</li>
+</ol>
+<div class="highlight"><pre><span></span><code>python3<span class="w"> </span>--version
+</code></pre></div>
+<ol>
+<li>安装pip3（可能已经预装好来）</li>
+</ol>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>--version
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># 安装新的pip3，过早的版本无法安装mkdocs</span>
+curl<span class="w"> </span>https://bootstrap.pypa.io/get-pip.py<span class="w"> </span>-o<span class="w"> </span>get-pip.py
+python3<span class="w"> </span>get-pip.py
+</code></pre></div>
+<ol>
+<li>安装mkdocs</li>
+</ol>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span>mkdocs
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mkdocs<span class="w"> </span>--version<span class="w">                                                                                                            </span>
+zsh:<span class="w"> </span><span class="nb">command</span><span class="w"> </span>not<span class="w"> </span>found:<span class="w"> </span>mkdocs
+</code></pre></div>
+<ol>
+<li>修改profile file</li>
+</ol>
+<div class="highlight"><pre><span></span><code>vim<span class="w"> </span>~/.zshrc
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">PYTHON_HOME</span><span class="o">=</span>/Users/mqy/Library/Python/3.9
+<span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$PYTHON_HOME</span>/bin
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">source</span><span class="w"> </span>~/.zshrc
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mkdocs<span class="w"> </span>--version<span class="w"> </span>
+mkdocs,<span class="w"> </span>version<span class="w"> </span><span class="m">1</span>.4.2<span class="w"> </span>from<span class="w"> </span>/Users/mqy/Librarsy/Python/3.9/lib/python/site-packages/mkdocs<span class="w"> </span><span class="o">(</span>Python<span class="w"> </span><span class="m">3</span>.9<span class="o">)</span>
+</code></pre></div>
+<ol>
+<li>创建笔记目录</li>
+</ol>
+<div class="highlight"><pre><span></span><code>mkdocs<span class="w"> </span>new<span class="w"> </span>my_note
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>my_note
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">3</span>
+.
+├──<span class="w"> </span>docs
+│<span class="w">   </span>└──<span class="w"> </span>index.md
+└──<span class="w"> </span>mkdocs.yml
 
-<p>使用mkdocs搭建个人博客</p>
+<span class="m">2</span><span class="w"> </span>directories,<span class="w"> </span><span class="m">2</span><span class="w"> </span>files
+</code></pre></div>
+<ol>
+<li>启动mkdocs server</li>
+</ol>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mkdocs<span class="w"> </span>serve
+INFO<span class="w">     </span>-<span class="w">  </span>Building<span class="w"> </span>documentation...
+INFO<span class="w">     </span>-<span class="w">  </span>Cleaning<span class="w"> </span>site<span class="w"> </span>directory
+INFO<span class="w">     </span>-<span class="w">  </span>Documentation<span class="w"> </span>built<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">0</span>.03<span class="w"> </span>seconds
+INFO<span class="w">     </span>-<span class="w">  </span><span class="o">[</span><span class="m">18</span>:47:24<span class="o">]</span><span class="w"> </span>Watching<span class="w"> </span>paths<span class="w"> </span><span class="k">for</span><span class="w"> </span>changes:<span class="w"> </span><span class="s1">&#39;docs&#39;</span>,<span class="w"> </span><span class="s1">&#39;mkdocs.yml&#39;</span>
+INFO<span class="w">     </span>-<span class="w">  </span><span class="o">[</span><span class="m">18</span>:47:24<span class="o">]</span><span class="w"> </span>Serving<span class="w"> </span>on<span class="w"> </span>http://127.0.0.1:8000/
+</code></pre></div>
+<ol>
+<li>访问页面</li>
+</ol>
+<div class="highlight"><pre><span></span><code>http://127.0.0.1:8000/
+</code></pre></div>
+<h2 id="_1">安装主题<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ol>
+<li>安装主题</li>
+</ol>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span>mkdocs-material
+</code></pre></div>
+<ol>
+<li>使用主题</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># 修改mkdocs.yml</span>
+site_name:<span class="w"> </span>mqy9174583
+theme:
+<span class="w">    </span>name:<span class="w"> </span><span class="s2">&quot;material&quot;</span>
+</code></pre></div>
+<h2 id="index">设置index<a class="headerlink" href="#index" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>参考 https://mkdocs-like-code.readthedocs.io/zh_CN/latest/MkDocs-advanced-operations/files-layout/</p>
+</blockquote>
+<p>直接创建目录及文件即可，无需修改mkdocs.yml，docs下面的目录结构，页面上会原封不动的显示出来。</p>
+<h2 id="github">部署到github<a class="headerlink" href="#github" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code># 前提:当前目录上是github上的一个参数
+mkdocs gh-deploy
+</code></pre></div>
 
 
 
