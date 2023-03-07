@@ -64,17 +64,19 @@ tiup update --self && tiup update cluster
 
 #### 单机部署tidb集群
 
-1. 集群实例列表
+##### 集群实例列表
 
-   | 实例    | 个数 | IP        | 端口  | 部署目录               |
-   | ------- | ---- | --------- | ----- | ---------------------- |
-   | TiKV    | 1    | 127.0.0.1 | 20160 | 使用global中配置的目录 |
-   | TiDB    | 1    | 127.0.0.1 | 4000  | ～                     |
-   | PD      | 1    | 127.0.0.1 | 2379  | ～                     |
-   | Monitor | 1    | 127.0.0.1 |       | ～                     |
-   | Grafana | 1    | 127.0.0.1 |       | ～                     |
+| 实例    | 个数 | IP        | 端口  | 部署目录               |
+| ------- | ---- | --------- | ----- | ---------------------- |
+| TiKV    | 1    | 127.0.0.1 | 20160 | 使用global中配置的目录 |
+| TiDB    | 1    | 127.0.0.1 | 4000  | ～                     |
+| PD      | 1    | 127.0.0.1 | 2379  | ～                     |
+| Monitor | 1    | 127.0.0.1 |       | ～                     |
+| Grafana | 1    | 127.0.0.1 |       | ～                     |
 
-2. 修改机器的sshd服务的最大链接数限制，默认是10
+##### 修改sshd最大链接数
+
+默认是10
 
 ```shell
 sudo vim /etc/ssh/sshd_config
@@ -88,7 +90,7 @@ sudo vim /etc/ssh/sshd_config
 service sshd restart
 ```
 
-3. 创建配置模板，`topo.yaml`
+##### 创建配置模板，`topo.yaml`
 
 ```yaml
 # # Global variables are applied to all deployments and used as the default value of# # the deployments if a specific deployment value is missing.
@@ -136,7 +138,7 @@ grafana_servers:
   - host: 127.0.0.1
 ```
 
-4. 执行集群部署命令
+##### 执行集群部署命令
 
 ```shell
 #tiup cluster deploy <cluster-name> <version> ./topo.yaml --user root -p
@@ -183,7 +185,7 @@ ubuntu@ubuntu-22-04:~/opt/tidb$ tree -L 2
 16 directories, 1 file
 ```
 
-5. 启动集群
+##### 启动集群
 
 ```shell
 # 上面一个步骤有提示
@@ -193,13 +195,13 @@ tiup cluster start test-tidb-cluster --init
 +5^m6qaF29bB=X14G%
 ```
 
-6. 查看集群状态
+##### 查看集群状态
 
 ```shell
 tiup cluster display test-tidb-cluster
 ```
 
-7. 使用mysql 连接tidb
+##### 使用mysql 连接tidb
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u root -p+5^m6qaF29bB=X14G%
@@ -219,7 +221,7 @@ mysql> show databases;
 5 rows in set (0.00 sec)
 ```
 
-8. 其他命令
+##### 其他命令
 
 ```shell
 # 查看集群状况
@@ -245,7 +247,7 @@ tiup cluster edit-config <cluster-name>
 
 如果忘记安装了tidb-server，是无法通过sql语句来查询数据库中的内容的，可以通过`tiup cluster scale out` 命令进行扩容。
 
-1. 编写配置文件
+##### 编写配置文件
 
 ```shell
 vim scale-out.yaml
@@ -290,13 +292,13 @@ pd_servers:
 
    可以使用 `tiup cluster edit-config <cluster-name>` 查看当前集群的配置信息，因为其中的 `global` 和 `server_configs` 参数配置默认会被 `scale-out.yaml` 继承，因此也会在 `scale-out.yaml` 中生效
 
-2. 执行扩容命令
+##### 执行扩容命令
 检查集群存在的潜在风险：
 
 ```shell
 tiup cluster check <cluster-name> scale-out.yaml --cluster --user ubuntu [-p] [-i /home/root/.ssh/gcp_rsa]
 ```
-   自动修复集群存在的潜在风险：
+   自动修复 集群存在的潜在风险：
 
 ```sh
 tiup cluster check <cluster-name> scale-out.yaml --cluster --apply --user ubuntu [-p] [-i /home/root/.ssh/gcp_rsa]
