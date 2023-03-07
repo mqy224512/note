@@ -356,11 +356,11 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#tikv" class="md-nav__link">
-    本地部署tikv集群
+  <a href="#tidb_2" class="md-nav__link">
+    本地部署tidb集群
   </a>
   
-    <nav class="md-nav" aria-label="本地部署tikv集群">
+    <nav class="md-nav" aria-label="本地部署tidb集群">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -371,7 +371,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tidb_2" class="md-nav__link">
+  <a href="#tidb_3" class="md-nav__link">
     单机部署tidb集群
   </a>
   
@@ -390,7 +390,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tikv_1" class="md-nav__link">
+  <a href="#tikv" class="md-nav__link">
     离线安装tikv 集群
   </a>
   
@@ -465,11 +465,11 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#tikv" class="md-nav__link">
-    本地部署tikv集群
+  <a href="#tidb_2" class="md-nav__link">
+    本地部署tidb集群
   </a>
   
-    <nav class="md-nav" aria-label="本地部署tikv集群">
+    <nav class="md-nav" aria-label="本地部署tidb集群">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -480,7 +480,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tidb_2" class="md-nav__link">
+  <a href="#tidb_3" class="md-nav__link">
     单机部署tidb集群
   </a>
   
@@ -499,7 +499,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tikv_1" class="md-nav__link">
+  <a href="#tikv" class="md-nav__link">
     离线安装tikv 集群
   </a>
   
@@ -529,7 +529,7 @@
 <h2 id="tidb">tidb 集群架构<a class="headerlink" href="#tidb" title="Permanent link">&para;</a></h2>
 <h2 id="tidb_1">tidb集群安装<a class="headerlink" href="#tidb_1" title="Permanent link">&para;</a></h2>
 <p>这里使用的是云服务器ubuntu 22.04</p>
-<h3 id="tikv">本地部署tikv集群<a class="headerlink" href="#tikv" title="Permanent link">&para;</a></h3>
+<h3 id="tidb_2">本地部署tidb集群<a class="headerlink" href="#tidb_2" title="Permanent link">&para;</a></h3>
 <h4 id="tiup">TiUP安装<a class="headerlink" href="#tiup" title="Permanent link">&para;</a></h4>
 <p>TiUP是TiDB4.0版本引入的集群运维工具，通过TiUP可以进行TiDB的日常运维工作，包括部署、启动、关闭、销毁、弹性扩容和升级TiDB集群，以及管理TiDB集群参数。</p>
 <ol>
@@ -570,7 +570,7 @@ GitHash:<span class="w"> </span>7223ed50460785a2adf666d511a257aa03110294
 </ol>
 <div class="highlight"><pre><span></span><code>tiup<span class="w"> </span>update<span class="w"> </span>--self<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>tiup<span class="w"> </span>update<span class="w"> </span>cluster
 </code></pre></div>
-<h4 id="tidb_2">单机部署tidb集群<a class="headerlink" href="#tidb_2" title="Permanent link">&para;</a></h4>
+<h4 id="tidb_3">单机部署tidb集群<a class="headerlink" href="#tidb_3" title="Permanent link">&para;</a></h4>
 <ol>
 <li>集群实例列表</li>
 </ol>
@@ -830,7 +830,7 @@ tiup<span class="w"> </span>cluster<span class="w"> </span>edit-config<span clas
 <li>[-i] 及 [-p] 为可选项，如果已经配置免密登录目标机，则不需填写。否则选择其一即可，[-i] 为可登录到目标机的 root 用户（或 --user 指定的其他用户）的私钥，也可使用 [-p] 交互式输入该用户的密码。</li>
 </ul>
 <p>预期日志结尾输出 <code>Scaled cluster  &lt;cluster-name&gt; out successfully</code> 信息，表示扩容操作成功</p>
-<h3 id="tikv_1">离线安装tikv 集群<a class="headerlink" href="#tikv_1" title="Permanent link">&para;</a></h3>
+<h3 id="tikv">离线安装tikv 集群<a class="headerlink" href="#tikv" title="Permanent link">&para;</a></h3>
 
 
 
