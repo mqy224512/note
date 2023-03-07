@@ -1,0 +1,878 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../mkdocs/Ma%E5%AE%89%E8%A3%85Mkdocs/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.1">
+    
+    
+      
+        <title>ubuntu22.04安装tidb集群 - mqy9174583</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.402914a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ubuntu2204tidb" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="mqy9174583" class="md-header__button md-logo" aria-label="mqy9174583" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            mqy9174583
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ubuntu22.04安装tidb集群
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="mqy9174583" class="md-nav__button md-logo" aria-label="mqy9174583" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    mqy9174583
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          工具
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          工具
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          Mkdocs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Mkdocs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mkdocs/Ma%E5%AE%89%E8%A3%85Mkdocs/" class="md-nav__link">
+        Mac 安装Mkdocs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          Tikv
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tikv
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          ubuntu22.04安装tidb集群
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        ubuntu22.04安装tidb集群
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tidb" class="md-nav__link">
+    tidb 集群架构
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tidb_1" class="md-nav__link">
+    tidb集群安装
+  </a>
+  
+    <nav class="md-nav" aria-label="tidb集群安装">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tikv" class="md-nav__link">
+    本地部署tikv集群
+  </a>
+  
+    <nav class="md-nav" aria-label="本地部署tikv集群">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tiup" class="md-nav__link">
+    TiUP安装
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tidb_2" class="md-nav__link">
+    单机部署tidb集群
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-tidb-server" class="md-nav__link">
+    扩容-tidb-server
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tikv_1" class="md-nav__link">
+    离线安装tikv 集群
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tidb" class="md-nav__link">
+    tidb 集群架构
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tidb_1" class="md-nav__link">
+    tidb集群安装
+  </a>
+  
+    <nav class="md-nav" aria-label="tidb集群安装">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tikv" class="md-nav__link">
+    本地部署tikv集群
+  </a>
+  
+    <nav class="md-nav" aria-label="本地部署tikv集群">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tiup" class="md-nav__link">
+    TiUP安装
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tidb_2" class="md-nav__link">
+    单机部署tidb集群
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-tidb-server" class="md-nav__link">
+    扩容-tidb-server
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tikv_1" class="md-nav__link">
+    离线安装tikv 集群
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="ubuntu2204tidb">ubuntu22.04安装tidb集群<a class="headerlink" href="#ubuntu2204tidb" title="Permanent link">&para;</a></h1>
+<h2 id="tidb">tidb 集群架构<a class="headerlink" href="#tidb" title="Permanent link">&para;</a></h2>
+<h2 id="tidb_1">tidb集群安装<a class="headerlink" href="#tidb_1" title="Permanent link">&para;</a></h2>
+<p>这里使用的是云服务器ubuntu 22.04</p>
+<h3 id="tikv">本地部署tikv集群<a class="headerlink" href="#tikv" title="Permanent link">&para;</a></h3>
+<h4 id="tiup">TiUP安装<a class="headerlink" href="#tiup" title="Permanent link">&para;</a></h4>
+<p>TiUP是TiDB4.0版本引入的集群运维工具，通过TiUP可以进行TiDB的日常运维工作，包括部署、启动、关闭、销毁、弹性扩容和升级TiDB集群，以及管理TiDB集群参数。</p>
+<ol>
+<li>下载并安装TiUP</li>
+</ol>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>--proto<span class="w"> </span><span class="s1">&#39;=https&#39;</span><span class="w"> </span>--tlsv1.2<span class="w"> </span>-sSf<span class="w"> </span>https://tiup-mirrors.pingcap.com/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+</code></pre></div>
+<p>TiUP会被安装在<code>~/.tiup</code>目录下，安装成功够会提示以下信息：</p>
+<div class="highlight"><pre><span></span><code>Successfully<span class="w"> </span><span class="nb">set</span><span class="w"> </span>mirror<span class="w"> </span>to<span class="w"> </span>https://tiup-mirrors.pingcap.com
+Detected<span class="w"> </span>shell:<span class="w"> </span>bash
+Shell<span class="w"> </span>profile:<span class="w">  </span>/home/ubuntu/.bashrc
+/home/ubuntu/.bashrc<span class="w"> </span>has<span class="w"> </span>been<span class="w"> </span>modified<span class="w"> </span>to<span class="w"> </span>add<span class="w"> </span>tiup<span class="w"> </span>to<span class="w"> </span>PATH
+open<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>terminal<span class="w"> </span>or<span class="w"> </span><span class="nb">source</span><span class="w"> </span>/home/ubuntu/.bashrc<span class="w"> </span>to<span class="w"> </span>use<span class="w"> </span>it
+Installed<span class="w"> </span>path:<span class="w"> </span>/home/ubuntu/.tiup/bin/tiup
+<span class="o">===============================================</span>
+Have<span class="w"> </span>a<span class="w"> </span>try:<span class="w">     </span>tiup<span class="w"> </span><span class="nv">playground</span>
+<span class="o">===============================================</span>
+</code></pre></div>
+<ol>
+<li>声明全局变量，这样在任何目录下都能够使用tiup命令（上面安装成功的提示中，Shell profile即是我们要source的shell profile）</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nb">source</span><span class="w"> </span>/home/ubuntu/.bashrc
+</code></pre></div>
+<p>验证命令</p>
+<div class="highlight"><pre><span></span><code>ubuntu@ubuntu-22-04:~$<span class="w"> </span>tiup<span class="w"> </span>-v
+<span class="m">1</span>.11.3<span class="w"> </span>tiup
+Go<span class="w"> </span>Version:<span class="w"> </span>go1.19.5
+Git<span class="w"> </span>Ref:<span class="w"> </span>v1.11.3
+GitHash:<span class="w"> </span>7223ed50460785a2adf666d511a257aa03110294
+</code></pre></div>
+<ol>
+<li>安装TiUP的cluster组件</li>
+</ol>
+<div class="highlight"><pre><span></span><code>tiup<span class="w"> </span>cluster
+</code></pre></div>
+<ol>
+<li>如果机器已经安装TiUP cluster，更新软件版本</li>
+</ol>
+<div class="highlight"><pre><span></span><code>tiup<span class="w"> </span>update<span class="w"> </span>--self<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>tiup<span class="w"> </span>update<span class="w"> </span>cluster
+</code></pre></div>
+<h4 id="tidb_2">单机部署tidb集群<a class="headerlink" href="#tidb_2" title="Permanent link">&para;</a></h4>
+<ol>
+<li>集群实例列表</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>实例</th>
+<th>个数</th>
+<th>IP</th>
+<th>端口</th>
+<th>部署目录</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TiKV</td>
+<td>1</td>
+<td>127.0.0.1</td>
+<td>20160</td>
+<td>使用global中配置的目录</td>
+</tr>
+<tr>
+<td>TiDB</td>
+<td>1</td>
+<td>127.0.0.1</td>
+<td>4000</td>
+<td>～</td>
+</tr>
+<tr>
+<td>PD</td>
+<td>1</td>
+<td>127.0.0.1</td>
+<td>2379</td>
+<td>～</td>
+</tr>
+<tr>
+<td>Monitor</td>
+<td>1</td>
+<td>127.0.0.1</td>
+<td></td>
+<td>～</td>
+</tr>
+<tr>
+<td>Grafana</td>
+<td>1</td>
+<td>127.0.0.1</td>
+<td></td>
+<td>～</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>修改机器的sshd服务的最大链接数限制，默认是10</li>
+</ol>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>vim<span class="w"> </span>/etc/ssh/sshd_config
+</code></pre></div>
+<p>修改<code>MaxSessions</code>至30</p>
+<p>重启sshd服务</p>
+<div class="highlight"><pre><span></span><code>service<span class="w"> </span>sshd<span class="w"> </span>restart
+</code></pre></div>
+<ol>
+<li>创建配置模板，<code>topo.yaml</code></li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># # Global variables are applied to all deployments and used as the default value of# # the deployments if a specific deployment value is missing.</span>
+<span class="c1"># 路径是相对于~路径来创建的</span>
+<span class="nt">global</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ubuntu&quot;</span>
+<span class="w">  </span><span class="nt">ssh_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">22</span>
+<span class="w">  </span><span class="nt">deploy_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/home/ubuntu/opt/tidb/tidb-deploy&quot;</span>
+<span class="w">  </span><span class="nt">data_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/home/ubuntu/opt/tidb/tidb-data&quot;</span>
+
+<span class="c1"># # Monitored variables are applied to all the machines.</span>
+<span class="nt">monitored</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">node_exporter_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9100</span>
+<span class="w">  </span><span class="nt">blackbox_exporter_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9115</span>
+
+<span class="nt">server_configs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">tidb</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">log.slow-threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
+<span class="w">  </span><span class="nt">tikv</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">readpool.storage.use-unified-pool</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">readpool.coprocessor.use-unified-pool</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">pd</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">replication.enable-placement-rules</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">replication.location-labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;host&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">tiflash</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">logger.level</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;info&quot;</span>
+
+<span class="nt">pd_servers</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1</span>
+
+<span class="nt">tidb_servers</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1</span>
+
+<span class="nt">tikv_servers</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1</span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20160</span>
+<span class="w">    </span><span class="nt">status_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20180</span>
+<span class="w">    </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">server.labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;logic-host-1&quot;</span><span class="w"> </span><span class="p p-Indicator">}</span>
+
+<span class="nt">monitoring_servers</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1</span>
+
+<span class="nt">grafana_servers</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1</span>
+</code></pre></div>
+<ol>
+<li>执行集群部署命令</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1">#tiup cluster deploy &lt;cluster-name&gt; &lt;version&gt; ./topo.yaml --user root -p</span>
+tiup<span class="w"> </span>cluster<span class="w"> </span>deploy<span class="w"> </span>test-tidb-cluster<span class="w"> </span>v6.1.2<span class="w"> </span>./topo.yaml<span class="w"> </span>--user<span class="w"> </span>ubuntu<span class="w"> </span>-p
+</code></pre></div>
+<ul>
+<li><code>&lt;cluster-name&gt;</code>：集群名称</li>
+<li><code>&lt;version&gt;</code>：集群版本，可以通过<code>tiup list tidb</code>命令查看当前部署的TiDB版本</li>
+<li><code>--user</code>：连接到目标机器时使用的用户名</li>
+<li><code>-p</code>：表示连接目标机器时使用的密码登陆</li>
+</ul>
+<p>查看部署目录</p>
+<div class="highlight"><pre><span></span><code>ubuntu@ubuntu-22-04:~/opt/tidb$<span class="w"> </span><span class="nb">pwd</span>
+/home/ubuntu/opt/tidb
+ubuntu@ubuntu-22-04:~/opt/tidb$<span class="w"> </span>ll
+total<span class="w"> </span><span class="m">20</span>
+drwxrwxr-x<span class="w">  </span><span class="m">4</span><span class="w"> </span>ubuntu<span class="w"> </span>ubuntu<span class="w"> </span><span class="m">4096</span><span class="w"> </span>Mar<span class="w">  </span><span class="m">5</span><span class="w"> </span><span class="m">18</span>:50<span class="w"> </span>./
+drwxrwxr-x<span class="w">  </span><span class="m">3</span><span class="w"> </span>ubuntu<span class="w"> </span>ubuntu<span class="w"> </span><span class="m">4096</span><span class="w"> </span>Mar<span class="w">  </span><span class="m">5</span><span class="w"> </span><span class="m">18</span>:31<span class="w"> </span>../
+drwxr-xr-x<span class="w">  </span><span class="m">8</span><span class="w"> </span>ubuntu<span class="w"> </span>ubuntu<span class="w"> </span><span class="m">4096</span><span class="w"> </span>Mar<span class="w">  </span><span class="m">5</span><span class="w"> </span><span class="m">18</span>:50<span class="w"> </span>tidb-data/
+drwxr-xr-x<span class="w"> </span><span class="m">10</span><span class="w"> </span>ubuntu<span class="w"> </span>ubuntu<span class="w"> </span><span class="m">4096</span><span class="w"> </span>Mar<span class="w">  </span><span class="m">5</span><span class="w"> </span><span class="m">18</span>:50<span class="w"> </span>tidb-deploy/
+-rw-rw-r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>ubuntu<span class="w"> </span>ubuntu<span class="w"> </span><span class="m">1174</span><span class="w"> </span>Mar<span class="w">  </span><span class="m">5</span><span class="w"> </span><span class="m">18</span>:49<span class="w"> </span>topo.yaml
+ubuntu@ubuntu-22-04:~/opt/tidb$<span class="w"> </span>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">2</span>
+.
+├──<span class="w"> </span>tidb-data
+│<span class="w">   </span>├──<span class="w"> </span>monitor-9100
+│<span class="w">   </span>├──<span class="w"> </span>pd-2379
+│<span class="w">   </span>├──<span class="w"> </span>prometheus-9090
+│<span class="w">   </span>├──<span class="w"> </span>tikv-20160
+│<span class="w">   </span>├──<span class="w"> </span>tikv-20161
+│<span class="w">   </span>└──<span class="w"> </span>tikv-20162
+├──<span class="w"> </span>tidb-deploy
+│<span class="w">   </span>├──<span class="w"> </span>grafana-3000
+│<span class="w">   </span>├──<span class="w"> </span>monitor-9100
+│<span class="w">   </span>├──<span class="w"> </span>pd-2379
+│<span class="w">   </span>├──<span class="w"> </span>prometheus-9090
+│<span class="w">   </span>├──<span class="w"> </span>tidb-4000
+│<span class="w">   </span>├──<span class="w"> </span>tikv-20160
+│<span class="w">   </span>├──<span class="w"> </span>tikv-20161
+│<span class="w">   </span>└──<span class="w"> </span>tikv-20162
+└──<span class="w"> </span>topo.yaml
+
+<span class="m">16</span><span class="w"> </span>directories,<span class="w"> </span><span class="m">1</span><span class="w"> </span>file
+</code></pre></div>
+<ol>
+<li>启动集群</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># 上面一个步骤有提示</span>
+tiup<span class="w"> </span>cluster<span class="w"> </span>start<span class="w"> </span>test-tidb-cluster<span class="w"> </span>--init
+
+<span class="c1"># 把生成的密码记录下来</span>
++5^m6qaF29bB<span class="o">=</span>X14G%
+</code></pre></div>
+<ol>
+<li>查看集群状态</li>
+</ol>
+<div class="highlight"><pre><span></span><code>tiup<span class="w"> </span>cluster<span class="w"> </span>display<span class="w"> </span>test-tidb-cluster
+</code></pre></div>
+<ol>
+<li>使用mysql 连接tidb</li>
+</ol>
+<div class="highlight"><pre><span></span><code>mysql<span class="w"> </span>-h<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span>-P<span class="w"> </span><span class="m">4000</span><span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p+5^m6qaF29bB<span class="o">=</span>X14G%
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>mysql&gt;<span class="w"> </span>show<span class="w"> </span>databases<span class="p">;</span>
++--------------------+
+<span class="p">|</span><span class="w"> </span>Database<span class="w">           </span><span class="p">|</span>
++--------------------+
+<span class="p">|</span><span class="w"> </span>INFORMATION_SCHEMA<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>METRICS_SCHEMA<span class="w">     </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>PERFORMANCE_SCHEMA<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>mysql<span class="w">              </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span><span class="nb">test</span><span class="w">               </span><span class="p">|</span>
++--------------------+
+<span class="m">5</span><span class="w"> </span>rows<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="o">(</span><span class="m">0</span>.00<span class="w"> </span>sec<span class="o">)</span>
+</code></pre></div>
+<ol>
+<li>其他命令</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># 查看集群状况</span>
+tiup<span class="w"> </span>cluster<span class="w"> </span>display<span class="w"> </span>&lt;cluster-name&gt;
+
+<span class="c1"># 停掉集群</span>
+tiup<span class="w"> </span>cluster<span class="w"> </span>stop<span class="w"> </span>&lt;cluster-name&gt;
+
+<span class="c1"># 销毁集群</span>
+tiup<span class="w"> </span>cluster<span class="w"> </span>destroy<span class="w"> </span>&lt;cluster-name&gt;<span class="w"> </span>-y
+
+<span class="c1"># 删除集群数据</span>
+tiup<span class="w"> </span>cluster<span class="w"> </span>clean<span class="w"> </span>&lt;cluster-name&gt;<span class="w"> </span>--all
+
+<span class="c1"># 查看集群列表</span>
+tiup<span class="w"> </span>cluster<span class="w"> </span>list
+
+<span class="c1"># 修改集群配置</span>
+tiup<span class="w"> </span>cluster<span class="w"> </span>edit-config<span class="w"> </span>&lt;cluster-name&gt;<span class="w"> </span>
+</code></pre></div>
+<h4 id="-tidb-server">扩容-tidb-server<a class="headerlink" href="#-tidb-server" title="Permanent link">&para;</a></h4>
+<p>如果忘记安装了tidb-server，是无法通过sql语句来查询数据库中的内容的，可以通过<code>tiup cluster scale out</code> 命令进行扩容。</p>
+<ol>
+<li>编写配置文件</li>
+</ol>
+<div class="highlight"><pre><span></span><code>vim<span class="w"> </span>scale-out.yaml
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nt">tidb_servers</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1</span>
+<span class="w">    </span><span class="w w-Error"> </span><span class="nt">ssh_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">22</span>
+<span class="w">     </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4000</span>
+<span class="w">     </span><span class="nt">status_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10080</span>
+<span class="w">     </span><span class="c1">#deploy_dir: /data/deploy/install/deploy/tidb-4000</span>
+<span class="w">     </span><span class="c1">#log_dir: /data/deploy/install/log/tidb-4000</span>
+</code></pre></div>
+<p>TiKV 配置文件参考：</p>
+<div class="highlight"><pre><span></span><code><span class="nt">tikv_servers</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.1.5</span>
+<span class="w">    </span><span class="w w-Error"> </span><span class="nt">ssh_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">22</span>
+<span class="w w-Error">   </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20160</span>
+<span class="w">   </span><span class="nt">status_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20180</span>
+<span class="w">   </span><span class="nt">deploy_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/data/deploy/install/deploy/tikv-20160</span>
+<span class="w">   </span><span class="nt">data_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/data/deploy/install/data/tikv-20160</span>
+<span class="w">   </span><span class="nt">log_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/data/deploy/install/log/tikv-20160</span>
+</code></pre></div>
+<p>PD 配置文件参考：</p>
+<div class="highlight"><pre><span></span><code><span class="nt">pd_servers</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.1.5</span>
+<span class="w w-Error">   </span><span class="nt">ssh_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">22</span>
+<span class="w">   </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pd-1</span>
+<span class="w">   </span><span class="nt">client_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2379</span>
+<span class="w">   </span><span class="nt">peer_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2380</span>
+<span class="w">   </span><span class="nt">deploy_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/data/deploy/install/deploy/pd-2379</span>
+<span class="w">   </span><span class="nt">data_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/data/deploy/install/data/pd-2379</span>
+<span class="w">   </span><span class="nt">log_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/data/deploy/install/log/pd-2379</span>
+</code></pre></div>
+<p>可以使用 <code>tiup cluster edit-config &lt;cluster-name&gt;</code> 查看当前集群的配置信息，因为其中的 <code>global</code> 和 <code>server_configs</code> 参数配置默认会被 <code>scale-out.yaml</code> 继承，因此也会在 <code>scale-out.yaml</code> 中生效</p>
+<ol>
+<li>执行扩容命令
+检查集群存在的潜在风险：</li>
+</ol>
+<p><div class="highlight"><pre><span></span><code>tiup<span class="w"> </span>cluster<span class="w"> </span>check<span class="w"> </span>&lt;cluster-name&gt;<span class="w"> </span>scale-out.yaml<span class="w"> </span>--cluster<span class="w"> </span>--user<span class="w"> </span>ubuntu<span class="w"> </span><span class="o">[</span>-p<span class="o">]</span><span class="w"> </span><span class="o">[</span>-i<span class="w"> </span>/home/root/.ssh/gcp_rsa<span class="o">]</span>
+</code></pre></div>
+   自动修复集群存在的潜在风险：</p>
+<p><div class="highlight"><pre><span></span><code>tiup<span class="w"> </span>cluster<span class="w"> </span>check<span class="w"> </span>&lt;cluster-name&gt;<span class="w"> </span>scale-out.yaml<span class="w"> </span>--cluster<span class="w"> </span>--apply<span class="w"> </span>--user<span class="w"> </span>ubuntu<span class="w"> </span><span class="o">[</span>-p<span class="o">]</span><span class="w"> </span><span class="o">[</span>-i<span class="w"> </span>/home/root/.ssh/gcp_rsa<span class="o">]</span>
+</code></pre></div>
+   执行 scale-out 命令扩容 TiDB 集群：</p>
+<div class="highlight"><pre><span></span><code>tiup<span class="w"> </span>cluster<span class="w"> </span>scale-out<span class="w"> </span>&lt;cluster-name&gt;<span class="w"> </span>scale-out.yaml<span class="w"> </span>--user<span class="w"> </span>ubuntu<span class="w"> </span><span class="o">[</span>-p<span class="o">]</span><span class="w"> </span><span class="o">[</span>-i<span class="w"> </span>/home/root/.ssh/gcp_rsa<span class="o">]</span>
+</code></pre></div>
+<p>以上操作示例中：</p>
+<ul>
+<li>扩容配置文件为 <code>scale-out.yaml</code>。</li>
+<li><code>--user root</code> 表示通过 root 用户登录到目标主机完成集群部署，该用户需要有 ssh 到目标机器的权限，并且在目标机器有 sudo 权限。也可以用其他有 ssh 和 sudo 权限的用户完成部署。</li>
+<li>[-i] 及 [-p] 为可选项，如果已经配置免密登录目标机，则不需填写。否则选择其一即可，[-i] 为可登录到目标机的 root 用户（或 --user 指定的其他用户）的私钥，也可使用 [-p] 交互式输入该用户的密码。</li>
+</ul>
+<p>预期日志结尾输出 <code>Scaled cluster  &lt;cluster-name&gt; out successfully</code> 信息，表示扩容操作成功</p>
+<h3 id="tikv_1">离线安装tikv 集群<a class="headerlink" href="#tikv_1" title="Permanent link">&para;</a></h3>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.b78d2936.min.js"></script>
+      
+    
+  </body>
+</html>
