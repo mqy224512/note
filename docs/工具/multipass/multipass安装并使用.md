@@ -6,7 +6,9 @@ Multipass 是一个轻量虚拟机管理器，是由 Ubuntu 运营公司 Canonic
 
 同时，Multipass提供了一个命令行界面来启动和管理 Linux 实例。下载一个全新的镜像需要几秒钟的时间，并且在几分钟内就可以启动并运行 VM。大大降低安装虚拟机的成本了。
 
-官网：https://multipass.run
+官网：[https://multipass.run](https://multipass.run)
+
+
 
 ## <font style="color:black;font-weight:bolder">Mac安装Multipass</font>
 
