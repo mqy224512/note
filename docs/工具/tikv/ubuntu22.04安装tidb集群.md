@@ -1,20 +1,14 @@
-# ubuntu22.04安装tidb集群
+# <font style="color:black;font-weight:bolder">ubuntu22.04安装tidb集群</font>
 
-## tidb 集群架构
-
-
-
-## tidb集群安装
+## <font style="color:black;font-weight:bolder">本地部署tidb集群</font>
 
 这里使用的是云服务器ubuntu 22.04
 
-### 本地部署tidb集群
-
-#### TiUP安装
+### <font style="color:black;font-weight:bolder">TiUP安装</font>
 
 TiUP是TiDB4.0版本引入的集群运维工具，通过TiUP可以进行TiDB的日常运维工作，包括部署、启动、关闭、销毁、弹性扩容和升级TiDB集群，以及管理TiDB集群参数。
 
-1. 下载并安装TiUP
+##### <font style="font-size:15px;color:black;font-weight:bolder">下载并安装TiUP</font>
 
 ```shell
 curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
@@ -34,7 +28,9 @@ Have a try:     tiup playground
 ===============================================
 ```
 
-2. 声明全局变量，这样在任何目录下都能够使用tiup命令（上面安装成功的提示中，Shell profile即是我们要source的shell profile）
+##### <font style="font-size:15px;color:black;font-weight:bolder">设置环境变量</font>
+
+声明全局变量，这样在任何目录下都能够使用tiup命令（上面安装成功的提示中，Shell profile即是我们要source的shell profile）
 
 ```shell
 source /home/ubuntu/.bashrc
@@ -50,21 +46,21 @@ Git Ref: v1.11.3
 GitHash: 7223ed50460785a2adf666d511a257aa03110294
 ```
 
-3. 安装TiUP的cluster组件
+##### <font style="font-size:15px;color:black;font-weight:bolder">安装TiUP的cluster组件</font>
 
 ```shell
 tiup cluster
 ```
 
-4. 如果机器已经安装TiUP cluster，更新软件版本
+如果机器已经安装TiUP cluster，更新软件版本
 
 ```shell
 tiup update --self && tiup update cluster
 ```
 
-#### 单机部署tidb集群
+### <font style="color:black;font-weight:bolder">单机部署tidb集群</font>
 
-##### 集群实例列表
+#### <font style="color:black;font-weight:bolder">集群实例列表</font>
 
 | 实例    | 个数 | IP        | 端口  | 部署目录               |
 | ------- | ---- | --------- | ----- | ---------------------- |
@@ -74,7 +70,7 @@ tiup update --self && tiup update cluster
 | Monitor | 1    | 127.0.0.1 |       | ～                     |
 | Grafana | 1    | 127.0.0.1 |       | ～                     |
 
-##### 修改sshd最大链接数
+#### <font style="color:black;font-weight:bolder">修改sshd最大链接数</font>
 
 默认是10
 
@@ -90,7 +86,7 @@ sudo vim /etc/ssh/sshd_config
 service sshd restart
 ```
 
-##### 创建配置模板，`topo.yaml`
+#### <font style="color:black;font-weight:bolder">创建配置模板，`topo.yaml`</font>
 
 ```yaml
 # # Global variables are applied to all deployments and used as the default value of# # the deployments if a specific deployment value is missing.
@@ -138,7 +134,7 @@ grafana_servers:
   - host: 127.0.0.1
 ```
 
-##### 执行集群部署命令
+#### <font style="color:black;font-weight:bolder">执行集群部署命令</font>
 
 ```shell
 #tiup cluster deploy <cluster-name> <version> ./topo.yaml --user root -p
@@ -185,7 +181,7 @@ ubuntu@ubuntu-22-04:~/opt/tidb$ tree -L 2
 16 directories, 1 file
 ```
 
-##### 启动集群
+#### <font style="color:black;font-weight:bolder">启动集群</font>
 
 ```shell
 # 上面一个步骤有提示
@@ -195,13 +191,13 @@ tiup cluster start test-tidb-cluster --init
 +5^m6qaF29bB=X14G%
 ```
 
-##### 查看集群状态
+#### <font style="color:black;font-weight:bolder">查看集群状态</font>
 
 ```shell
 tiup cluster display test-tidb-cluster
 ```
 
-##### 使用mysql 连接tidb
+#### <font style="color:black;font-weight:bolder">使用mysql 连接tidb</font>
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u root -p+5^m6qaF29bB=X14G%
@@ -221,7 +217,7 @@ mysql> show databases;
 5 rows in set (0.00 sec)
 ```
 
-##### 其他命令
+#### <font style="color:black;font-weight:bolder">其他命令</font>
 
 ```shell
 # 查看集群状况
@@ -243,11 +239,11 @@ tiup cluster list
 tiup cluster edit-config <cluster-name> 
 ```
 
-#### 扩容-tidb-server
+### <font style="color:black;font-weight:bolder">扩容-tidb-server</font>
 
 如果忘记安装了tidb-server，是无法通过sql语句来查询数据库中的内容的，可以通过`tiup cluster scale out` 命令进行扩容。
 
-##### 编写配置文件
+#### <font style="color:black;font-weight:bolder">编写配置文件</font>
 
 ```shell
 vim scale-out.yaml
@@ -292,7 +288,8 @@ pd_servers:
 
    可以使用 `tiup cluster edit-config <cluster-name>` 查看当前集群的配置信息，因为其中的 `global` 和 `server_configs` 参数配置默认会被 `scale-out.yaml` 继承，因此也会在 `scale-out.yaml` 中生效
 
-##### 执行扩容命令
+#### <font style="color:black;font-weight:bolder">执行扩容命令</font>
+
 检查集群存在的潜在风险：
 
 ```shell
@@ -317,5 +314,5 @@ tiup cluster scale-out <cluster-name> scale-out.yaml --user ubuntu [-p] [-i /hom
 
    预期日志结尾输出 `Scaled cluster  <cluster-name> out successfully` 信息，表示扩容操作成功
 
-### 离线安装tikv 集群
+### <font style="color:black;font-weight:bolder">单机本地离线安装tikv 集群</font>
 

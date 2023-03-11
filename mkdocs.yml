@@ -2,6 +2,16 @@ site_name: mqy9174583
 theme:
   name: material
   #language: "zh"
+nav:
+- Home: index.md
+- 工具:
+    - mkdocs:
+      - Mac安装Mkdocs: 工具/mkdocs/Mac安装Mkdocs.md
+    - tikv:
+      - tidb集群架构: 工具/tikv/tidb集群架构.md
+      - ubuntu22.04安装tidb集群: 工具/tikv/ubuntu22.04安装tidb集群.md
+    - multipass:
+      - multipass安装并使用: 工具/multipass/multipass安装并使用.md
 markdown_extensions:
   - admonition  # 提示块
   - footnotes  # 脚注
@@ -27,3 +37,4 @@ markdown_extensions:
 #  - pymdownx.magiclink  # 自动识别超链接
   - pymdownx.tasklist:  # 复选框checklist
       custom_checkbox: true
+
