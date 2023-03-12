@@ -185,6 +185,7 @@ multipass recover <vm-name>
 如：
 
 ```shell
+# 挂载完数据目录之后可能需要重启虚拟机才能生效
 multipass mount /mnt ubuntu2204
 multipass mount /mnt ubuntu2204:/mnt
 ```
@@ -205,7 +206,9 @@ multipass suspend <vm-name>
 
 ## <font style="color:black;font-weight:bolder">问题</font>
 
-### <font style="color:black;font-weight:bolder">ssh连接Permission denied (publickey)</font>
+### <font style="color:black;font-weight:bolder">ssh连接vm失败Permission denied (publickey)</font>
+
+宿主机使用ssh连接vm失败，报错：`Permission denied (publickey)`
 
 可能是Linux上ssh服务没有开密码登录
 
@@ -230,4 +233,29 @@ sudo systemctl restart sshd
 ```shell
 sudo passwd ubuntu
 ```
+
+### <font style="color:black;font-weight:bolder">挂载目录时报错</font>
+
+mac挂载数据目录报错：
+
+```shell
+mount failed: Error enabling mount support in 'ubuntu2204'                      
+
+Please install the 'multipass-sshfs' snap manually inside the instance.
+```
+
+需要进入到虚拟机中，然后安装`multipass-sshfs`
+
+```shell
+multipass shell <vm-name>
+```
+
+```shell
+sudo apt-get update
+sudo apt-get install sshfs
+```
+
+### <font style="color:black;font-weight:bolder">无法联通外网</font>
+
+如果可以和宿主机正常通信却无法联通外网，检查是否开着vpn，当我开启vpn的时候在虚拟机内是无法ping通外网的
 
