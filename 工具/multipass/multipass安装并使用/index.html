@@ -559,8 +559,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#sshpermission-denied-publickey" class="md-nav__link">
-    ssh连接Permission denied (publickey)
+  <a href="#sshvmpermission-denied-publickey" class="md-nav__link">
+    ssh连接vm失败Permission denied (publickey)
   </a>
   
 </li>
@@ -568,6 +568,20 @@
           <li class="md-nav__item">
   <a href="#_19" class="md-nav__link">
     密码修改
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    挂载目录时报错
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    无法联通外网
   </a>
   
 </li>
@@ -828,8 +842,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#sshpermission-denied-publickey" class="md-nav__link">
-    ssh连接Permission denied (publickey)
+  <a href="#sshvmpermission-denied-publickey" class="md-nav__link">
+    ssh连接vm失败Permission denied (publickey)
   </a>
   
 </li>
@@ -837,6 +851,20 @@
           <li class="md-nav__item">
   <a href="#_19" class="md-nav__link">
     密码修改
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    挂载目录时报错
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    无法联通外网
   </a>
   
 </li>
@@ -977,7 +1005,8 @@ multipass<span class="w"> </span>delete<span class="w"> </span>--purge<span clas
 <h3 id="_15"><font style="color:black;font-weight:bolder">宿主机挂载</font><a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <p><code>multipass mount 宿主机目录 虚拟机名称：虚拟机目录</code></p>
 <p>如：</p>
-<div class="highlight"><pre><span></span><code>multipass<span class="w"> </span>mount<span class="w"> </span>/mnt<span class="w"> </span>ubuntu2204
+<div class="highlight"><pre><span></span><code><span class="c1"># 挂载完数据目录之后可能需要重启虚拟机才能生效</span>
+multipass<span class="w"> </span>mount<span class="w"> </span>/mnt<span class="w"> </span>ubuntu2204
 multipass<span class="w"> </span>mount<span class="w"> </span>/mnt<span class="w"> </span>ubuntu2204:/mnt
 </code></pre></div>
 <h3 id="_16"><font style="color:black;font-weight:bolder">宿主机解除挂载</font><a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
@@ -988,7 +1017,8 @@ multipass<span class="w"> </span>mount<span class="w"> </span>/mnt<span class="w
 <div class="highlight"><pre><span></span><code>multipass suspend &lt;vm-name&gt;
 </code></pre></div>
 <h2 id="_18"><font style="color:black;font-weight:bolder">问题</font><a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
-<h3 id="sshpermission-denied-publickey"><font style="color:black;font-weight:bolder">ssh连接Permission denied (publickey)</font><a class="headerlink" href="#sshpermission-denied-publickey" title="Permanent link">&para;</a></h3>
+<h3 id="sshvmpermission-denied-publickey"><font style="color:black;font-weight:bolder">ssh连接vm失败Permission denied (publickey)</font><a class="headerlink" href="#sshvmpermission-denied-publickey" title="Permanent link">&para;</a></h3>
+<p>宿主机使用ssh连接vm失败，报错：<code>Permission denied (publickey)</code></p>
 <p>可能是Linux上ssh服务没有开密码登录</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>vim<span class="w"> </span>/etc/ssh/sshd_config
 </code></pre></div>
@@ -1001,6 +1031,20 @@ multipass<span class="w"> </span>mount<span class="w"> </span>/mnt<span class="w
 <h3 id="_19"><font style="color:black;font-weight:bolder">密码修改</font><a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>passwd<span class="w"> </span>ubuntu
 </code></pre></div>
+<h3 id="_20"><font style="color:black;font-weight:bolder">挂载目录时报错</font><a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<p>mac挂载数据目录报错：</p>
+<div class="highlight"><pre><span></span><code>mount<span class="w"> </span>failed:<span class="w"> </span>Error<span class="w"> </span>enabling<span class="w"> </span>mount<span class="w"> </span>support<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s1">&#39;ubuntu2204&#39;</span><span class="w">                      </span>
+
+Please<span class="w"> </span>install<span class="w"> </span>the<span class="w"> </span><span class="s1">&#39;multipass-sshfs&#39;</span><span class="w"> </span>snap<span class="w"> </span>manually<span class="w"> </span>inside<span class="w"> </span>the<span class="w"> </span>instance.
+</code></pre></div>
+<p>需要进入到虚拟机中，然后安装<code>multipass-sshfs</code></p>
+<div class="highlight"><pre><span></span><code>multipass<span class="w"> </span>shell<span class="w"> </span>&lt;vm-name&gt;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>sshfs
+</code></pre></div>
+<h3 id="_21"><font style="color:black;font-weight:bolder">无法联通外网</font><a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<p>如果可以和宿主机正常通信却无法联通外网，检查是否开着vpn，当我开启vpn的时候在虚拟机内是无法ping通外网的</p>
 
 
 
