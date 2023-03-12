@@ -12,6 +12,8 @@ nav:
       - ubuntu22.04安装tidb集群: 工具/tikv/ubuntu22.04安装tidb集群.md
     - multipass:
       - multipass安装并使用: 工具/multipass/multipass安装并使用.md
+    - ubuntu:
+      - ubuntu相关操作: 工具/ubuntu/ubuntu相关操作.md
 markdown_extensions:
   - admonition  # 提示块
   - footnotes  # 脚注

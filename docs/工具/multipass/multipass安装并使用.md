@@ -203,3 +203,31 @@ multipass unmount ubuntu2204
 multipass suspend <vm-name>
 ```
 
+## <font style="color:black;font-weight:bolder">问题</font>
+
+### <font style="color:black;font-weight:bolder">ssh连接Permission denied (publickey)</font>
+
+可能是Linux上ssh服务没有开密码登录
+
+```shell
+sudo vim /etc/ssh/sshd_config
+```
+
+找到`PasswordAuthentication`,将`no`改为`yes` 
+
+```shell
+PasswordAuthentication yes
+```
+
+然后重启服务
+
+```shell
+sudo systemctl restart sshd
+```
+
+### <font style="color:black;font-weight:bolder">密码修改</font>
+
+```shell
+sudo passwd ubuntu
+```
+
